@@ -43,7 +43,6 @@
             <div class="topBox">
               <span class="orderStatus">{{ item.orderStatus }}</span>
             </div>
-
             <div class="bottomBox">
               <div class="bottomLeft">
                 <div class="imgBox">
@@ -163,14 +162,12 @@ export default {
       activeName: "",
       token: null,
       // 图片路径
-      orderMsg: [
-
-      ]
+      orderMsg:[]
     };
   },
   created() {
     this.checkedToken(localStorage.getItem('token'));
-    console.log(this.$router.history.current.params.name)
+    // console.log(this.$router.history.current.params.name)
     this.activeName = this.$router.history.current.params.name;
     // 每一个按钮 存一个参数
     // 拉取 数据函数
@@ -210,8 +207,10 @@ export default {
           `https://gx.budaohuaxia.com/api/Technician/StoreStatus?token=${this.token}&status=${id}`
         )
         .then(res => {
+          // console.log(this.orderMsg)
           this.orderMsg.splice(0, this.orderMsg.length);
           res.data.data.map(item => {
+            // console.log(item)
             let orderSs = "";
             if (item.status == 0) {
               orderSs = "未审核";
@@ -226,7 +225,8 @@ export default {
             } else if (item.status == 5) {
               orderSs = "待确认";
             }
-            this.orderMsg = [];
+            // this.orderMsg = [];
+            // 问题出现在这里`
             this.orderMsg.push({
               imageSrc: `https://gx.budaohuaxia.com${item.Car.brand_image}`,
               timeTitle: item.Car.brand_name,
@@ -235,6 +235,8 @@ export default {
               orderTime: item.js_ddsj,
               orderId: item.id
             });
+
+            // console.log(this.orderMsg.length)
           });
         });
     }

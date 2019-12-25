@@ -1,0 +1,1252 @@
+html,body,#app{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    margin: 0;
+}
+.van-icon-arrow-left:before{
+    color: #aaa;
+}
+.forgetPsd{
+    float: right;
+    font-size: 13px;
+    margin-right: 16px;
+    margin-top: 10px;
+    color: blue;
+}
+#loginBox .topBar{
+    margin-top: 63px;
+}
+#loginBox .inputbox input{
+    margin-top: 60px;
+    border-bottom: 1px solid #F1BB98;
+    font-size:16px;
+    font-family:PingFang SC;
+    font-weight:400;
+    /* line-height:22px; */
+    color:rgba(153,153,153,1);
+    opacity:1;
+    padding-bottom: 5px;
+}
+
+#loginBox .loginbtn{
+    margin-top: 37px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#loginBox .loginbtn button{
+    width: 100%;
+    height: 44px;
+    border-radius: 4px;
+}
+#loginBox .text{
+    font-size:20px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:28px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    float: left;
+    margin-left: 20px;
+}
+#loginBox li{
+    border: 1px solid#F1BB98;
+    width: 49px;
+    height: 49px;
+    border-radius: 4px;
+}
+
+/* 主页 */
+#home{
+    height: 100%;
+    background:rgba(248,248,248,1);
+}
+#home .tagSign{
+    position: absolute;
+    background: red;
+    padding: 0.5px 4px 3px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 10px;
+    right: -6px;
+    top: -6px;
+}
+#home .headContainer{
+    height: 174px;
+    width: 100%;
+    background:url(../assets/img/creditcard.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-top: 10px;
+    position: relative;
+}
+
+#home .headContainer h2{
+    font-size:17px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:24px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+    margin-top: 0px;
+}
+#home .infoContainer{
+    height: 72px;
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+}
+#home .infoContainer img{
+    height: 72px;
+    width: 72px;
+    float: left;
+    z-index: 1000;
+    margin-left: 20px;
+    border-radius: 100%;
+    margin-top: -10px;
+    margin-right: 15px;
+}
+
+#home .nameContainer{
+    float: left;
+    height: 100%;
+}
+
+#home .nameContainer h3{
+    /* float: left; */
+    margin-top: 10px;
+    font-size:20px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    /* line-height:28px; */
+    color:rgba(255,255,255,1);
+    opacity:1;
+    margin-bottom: 0px;
+    display: block;
+}
+#home .nameContainer span{
+    float: left;
+    margin-top: 0px;
+    height: 13px;
+    /* display: block; */
+    font-size:9px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:13px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+    background:rgba(227,119,49,1);
+    border-radius:13px;
+    padding: 0px 8px;
+}
+
+#home .moneyContainer{
+    /* display: inline-block; */
+    float: right;
+    margin-right: 29px;
+    margin-top:23px;
+    font-size:15px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:21px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+}
+
+#home .moneyContainer i{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-size: contain;
+    background: url(../assets/img/money.png);
+}
+
+#home .orderContainer,.itemContainer{
+    padding: 10px 16px;
+}
+
+#home .van-cell__title span{
+    float: left;
+    margin-left: 20px;
+    margin-top: -1px;
+}
+
+#home .moneyContainer .money{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 0;
+    border-radius: 0px;
+    position: relative;
+    top: 0.2px;
+    margin-right: 3px;
+}
+
+#home .van-cell:not(:last-child)::after{
+    left: 0;
+}
+#home .orderContainer .itemList{
+    padding: 0px;
+}
+
+#home .van-cell-group{
+    border-radius: 8px;
+    overflow: hidden;
+}
+#home .third{
+    border-bottom: 1px solid #ebedf0;
+}
+#home .orderContainer .van-cell__value{
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:17px;
+    color:rgba(153,153,153,1);
+    opacity:1;
+    margin-top: 4px;
+}
+#home .orderContainer .van-cell__title{
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+}
+
+#home .itemContainer{
+    margin: 0px 16px;
+    padding: 0px;
+}
+#home .itemContainer .van-cell{
+    height: 50px;
+    line-height: 35px;
+}
+
+#btmBar{
+    position: fixed;
+    bottom:0px;
+    width: 100%;
+    height: 49px;
+}
+#btmBar .van-grid-item__content{
+    padding: 0px;
+    /* color: #F1BB98; */
+}
+
+#btmBar .van-grid-item__text{
+    margin-top: 1px;
+}
+#btmBar .van-grid-item__icon{
+    font-size: 0.5rem;
+    /* color: #F1BB98; */
+}
+#btmBar .active{
+    color: #e37731;
+}
+
+#btmBar .van-grid-item__text{
+    color: unset;
+}
+
+/* washCar */
+#washList{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(248,248,248,1);
+}
+
+#washList .van-card{
+    background: #fff;
+    border-radius: 8px;
+}
+
+#washList #listContainer{
+    height: 100%;
+    width: auto;
+    padding: 10px 16px;
+    padding-bottom:16px;
+}
+#washList .van-card__title{
+    text-align: left;
+    display: inline-block;
+    font-size:18px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:25px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#washList .distance{
+    position: relative;
+    top: -30px;
+}
+#washList .address{
+    margin-top: 5px;
+    float: left;
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:17px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    position: relative;
+    width: 200px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#washList .address i{
+    display: inline-block;
+    height: 14px;
+    width: 10px;
+    background-image: url(../assets/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top:3px;
+    margin-right: 3px;
+}
+
+#washList .van-card__footer{
+    margin-top: 10px;
+    line-height: 30px;
+}
+#washList .rateBox{
+    float: left;
+    margin-top: 20px;
+}
+#washList .rateValue{
+    color: #e37731;
+    display: inline-block;
+    margin-top: 22px;
+}
+#washList .money{
+    font-size:19px;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(217,38,38,1);
+    opacity:1;
+    position: relative;
+    top: -5px;
+}
+.money{
+    font-size:19px;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(217,38,38,1);
+    opacity:1;
+    position: relative;
+    top: -5px;
+}
+/* detail */
+#detail{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(248,248,248,1);
+}
+#detail .telphone{
+    /* float: right; */
+    position: relative;
+    top: 10px;
+    right: 10px;
+    color: green;
+    text-decoration: underline;
+    font-size: 13px;
+}
+#detail .van-swipe{
+    width: auto;
+    margin: 10px 20px;
+    height: 184px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+#detail .van-swipe img{
+    width: 100%;
+}
+#detail .van-panel{
+    margin: 10px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+#detail .van-panel .van-cell__value{
+    color: green;
+    text-decoration: underline;
+}
+#detail .van-cell__title{
+    font-size:16px;
+    font-family:PingFang SC;
+    font-weight:800;
+    line-height:28px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    margin-left: -30px;
+    width: auto;
+}
+#detail .dollar{
+    font-size: 16px;
+    position: relative;
+    top: -8px;
+}
+#detail .info{
+    position: relative;
+    text-align: left;
+    /* padding-bottom: 5px; */
+}
+#detail .address i{
+    display: inline-block;
+    height: 14px;
+    width: 10px;
+    background-image: url(../assets/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top:3px;
+    margin-right: 3px;
+}
+#detail .address{
+    position: relative;
+    left: 10px;
+    margin-top: 5px;
+    /* float: left; */
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:20px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    width: 200px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#detail .price{
+    float: right;
+    font-size:24px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:33px;
+    color:rgba(217,38,38,1);
+    position: relative;
+    top: -40px;
+    right: 20px;
+}
+#detail .distance{
+    display: block;
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:17px;
+    color:rgba(129,129,129,1);
+    opacity:1;
+    position: relative;
+    left: 20px;
+}
+#detail .description{
+    margin: 10px 20px;
+}
+#detail .description h4{
+    text-align: left;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:20px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    background: #fff;
+    width: auto;
+    margin-bottom: 0px;
+    height: 45px;
+    line-height: 45px;
+    padding: 0px 20px;
+    border-bottom: 1px solid #eee;
+}
+#detail .btnContainer{
+    padding:0px 20px;
+    height: 36px;
+}
+#detail .van-button{
+    width: 100%;
+    background:#e37731;
+    border-radius: 4px;
+    color: #fff;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:20px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+    height: 100%;
+}
+#orderDetail{
+    height: 100%;
+    width: 100%;
+    background: rgba(248,248,248,1);
+}
+#orderDetail h4{
+    margin: 10px 20px;
+    text-align: left;
+    font-size:11px;
+    font-family:PingFang SC;
+    font-weight:800;
+    line-height:16px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#orderDetail .van-card{
+    margin-left: 20px;
+    margin-right: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+#orderDetail .van-card__title{
+    margin-bottom: 20px;
+    font-size:18px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:25px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#orderDetail .address{
+    float: left;
+    width: 200px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#orderDetail .van-card__content{
+    text-align: left;
+}
+#orderDetail .address i{
+    display: inline-block;
+    height: 14px;
+    width: 10px;
+    background-image: url(../assets/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top:3px;
+    margin-right: 3px;
+}
+#orderDetail .van-cell:not(:last-child)::after{
+    border-bottom: 0px;
+}
+#orderDetail .van-cell{
+    border-bottom: 1px solid #eee;
+}
+#orderDetail .orderInfo{
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0px 10px;
+}
+#orderDetail .van-cell__title{
+    text-align: left;
+}
+#orderDetail .btnContainer{
+    margin-top: 20px;
+    padding:0px 20px;
+    height: 36px;
+}
+#orderDetail .van-button{
+    width: 100%;
+    background:#e37731;
+    border-radius: 4px;
+    color: #fff;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:20px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+    height: 100%;
+}
+/* comments */
+#comment{
+    height: 100%;
+    width: 100%;
+    background: rgba(248,248,248,1);
+}
+#comment .commentBox{
+    margin-right: 20px;
+    margin-left: 20px;
+    background: #fff;
+}
+#comment .van-card{
+    margin-left: 20px;
+    margin-right: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+#comment .van-card__title{
+    margin-bottom: 20px;
+    font-size:18px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:25px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#comment .address{
+    float: left;
+}
+#comment .van-card__content{
+    text-align: left;
+}
+#comment .address i{
+    display: inline-block;
+    height: 14px;
+    width: 10px;
+    background-image: url(../assets/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top:3px;
+    margin-right: 3px;
+}
+#comment .commentBox{
+    border-radius: 8px;
+}
+#comment .commentBox h4{
+    font-size:15px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:40px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    text-align: left;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+#comment .radio{
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+#comment .radio span{
+    font-size:11px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:16px;
+    color:rgba(129,129,129,1);
+    opacity:1;
+    padding: 5px 47px;
+    /* background: #e37731; */
+    border: 1px solid #eee;
+    border-radius: 15px;
+    /* color: #fff; */
+}
+#comment .radio .yes{
+    border: 1px solid #e37731;
+    color: #e37731;
+    margin-left: 15px;
+}
+#comment .radio .no{
+    margin-left: -10px;
+}
+#comment .btnContainer{
+    padding:0px 20px;
+    height: 36px;
+}
+#comment .van-button{
+    width: 100%;
+    background:#e37731;
+    border-radius: 4px;
+    color: #fff;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:20px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+    height: 100%;
+}
+#comment .rateBox{
+    margin: 10px 20px;
+    border-radius: 8px;
+    background:#fff
+}
+#comment .rateBox h4{
+    font-size:15px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:40px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    text-align: left;
+    padding-top: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+#comment .van-grid-item__content{
+    height: 15px;
+    margin: 8px 15px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+#comment .rateBox .active .van-grid-item__content{
+    border-color: #e37731;
+}
+#comment .rateBox .active .van-grid-item__content span{
+    color: #e37731;
+}
+
+/* 订单列表 */
+
+/* #lists{
+    height:100%;
+    width: 100%;
+    background:white;
+
+} */
+
+/* #lists .jvli{
+    position: absolute;
+    top:50px;
+    width:20%;
+    z-index: 9;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content:center;
+}
+
+#lists .van-card{
+    margin-top: 0px;
+    background: #fff;
+    /* border-radius: 8px; */
+/* }
+#lists .van-card__title{
+    margin-bottom: 20px;
+    font-size:18px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:25px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#lists .address{
+    float: left;
+    position: relative;
+    width: 200px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#lists .money{
+    font-size:19px;
+    font-family:PingFang SC;
+    font-weight:400;
+    color:rgba(217,38,38,1);
+    opacity:1;
+    position: relative;
+    top: -5px;
+}
+#lists .van-card__content{
+    text-align: left;
+}
+#lists .address i{
+    display: inline-block;
+    height: 14px;
+    width: 10px;
+    background-image: url(../assets/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    top:3px;
+    margin-right: 3px;
+}
+#lists .card{
+    margin: 10px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+#lists .card h4{
+    background: #fff;
+    margin: 0px;
+    text-align: left;
+    height: 34px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+#lists .card h4 .dateTime {
+    position: relative;
+    margin-left: 10px;
+    top: 10px;
+    font-size:12px;
+    font-family:PingFang SC;
+    float: left;
+    font-weight:400;
+    line-height:17px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#lists .card h4 .status{
+    margin-right: 20px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    position: relative;
+    top: 10px;
+    background: #e37731;
+    float: right;
+    color: #fff;
+    font-size:10px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:14px;
+    /* color:rgba(227,119,49,1); */
+    /* opacity:1;
+}
+#lists .van-tabs__line{
+    background-color: #e37731;
+}
+#lists .van-tab--active{
+    color: #e37731;
+}  */ 
+/* setPsd */
+#setPsd h2{
+    text-align: left;
+    font-size:20px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:28px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    margin: 0px;
+    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-left: 16px;
+}
+#setPsd .btnContainer{
+    margin-top: 20px;
+    padding:0px 16px;
+}
+#setPsd .van-button{
+    width: 100%;
+    background:#e37731;
+    border-radius: 4px;
+    color: #fff;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:20px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+}
+#setPsd .inputbox input{
+    border-bottom: 1px solid #F1BB98;
+    font-size:16px;
+    font-family:PingFang SC;
+    font-weight:400;
+    /* line-height:22px; */
+    color:rgba(153,153,153,1);
+    opacity:1;
+    padding-bottom: 5px;
+}
+#setPsd .van-cell:not(:last-child)::after {
+    border-bottom: none;
+}
+/* signs */
+#signs .van-cell{
+    text-align: left;
+}
+#signs .van-image{
+    top: 8px;
+}
+
+
+/* cars */
+#cars .foot-bar{
+    position: fixed;
+    bottom: 0;
+}
+#cars .foot-text{
+    display: inline;
+}
+#cars .van-tree-select__nav {
+    width: 90px !important;
+    background: #fff;
+
+}
+#cars .submit{
+    float: right;
+}
+#cars .van-sidebar-item{
+    text-align: center;
+}
+/* .van-sidebar{
+    width: 90px !important;
+    padding: 0;
+    margin: 0;
+} */
+#cars .van-sidebar-item{
+    width: 90px;
+}
+#cars .van-tree-select__content{
+    /* margin-top: 12px; */
+    margin-left: -52px;
+    background: #fff;
+}
+#cars .van-card{
+    height:134px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 3px 20px rgba(118,118,118,0.15);
+    opacity:1;
+    border-radius:8px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+#cars .desc_title{
+    font-size:16px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:22px;
+    color:rgba(31,31,31,1);
+    opacity:1;
+}
+#cars .van-card__desc{
+    display: block;
+    margin-top: 4px;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    text-overflow:ellipsis;
+}
+#cars .van-card__footer{
+    margin-top: 5px;
+    line-height: 25px;
+}
+#cars .itemPrice{
+    float: left;
+    margin-left: 98px;
+    font-size:18px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:25px;
+    color:rgba(217,38,38,1);
+}
+#cars .checkBtn{
+    /* display: inline-block; */
+    float: right;
+    margin-top: 2px;
+}
+#cars .foot-bar{
+    bottom: 0px;
+    text-align: center;
+    position: fixed;
+    min-height: 50px;
+}
+#cars .foot-text{
+    margin:15px 20px;
+    display: inline-block;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+}
+#cars .submit{
+    height:100%;
+    float: right;
+    position: absolute;
+    right: 0;
+    padding: 0px 29px;
+}
+#cars .van-tree-select__content{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#cars .van-cell__value--alone{
+    height: 54px;
+}
+#cars .van-card__content .desc_title{
+    text-align: left;
+}
+#cars .van-card__bottom, .van-card__desc{
+    text-align: left;
+}
+#infos .van-cell-group{
+    text-align: left;
+}
+#infos .sexs{
+    margin: 0px;
+    font-family:PingFang SC;
+    font-weight:400;
+    /* line-height:22px; */
+    color:rgba(57,57,57,1);
+    opacity:1;
+    font-size:12px;
+    margin-top: 5px;
+}
+#infos .van-radio-group{
+    margin-top: 0px;
+}
+#infos .van-radio{
+    float: left;
+    margin-right: 40px;
+}
+#infos .van-cell__value{
+    font-size: 12px;
+    width: 200px;
+    overflow: hidden;
+    height: 25px;
+    text-emphasis: true;
+
+}
+#infos .van-cell{
+    border-bottom: 1px solid #F1BB98;
+}
+#infos{
+    padding: 0px 16px;
+}
+#infos .van-cell{
+    padding-left: 0px;
+    padding-right: 0px ;
+}
+
+/* .van-image__error, .van-image__img, .van-image__loading{
+    width: auto;
+    height: auto;
+} */
+#infos .btnContainer{
+    margin-top: 50px;
+    /* padding:0px 16px; */
+}
+#infos .van-button{
+    width: 100%;
+    background:#e37731;
+    border-radius: 4px;
+    color: #fff;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:20px;
+    color:rgba(255,255,255,1);
+    opacity:1;
+}
+
+/*这是 技师端 需求列表*/
+
+/* #lists .van-tabs__nav{
+    width: 100%;
+    /* display: inline-block */
+/* } */
+/* #lists .chooseBtn{
+    width:100%;
+    height: 44px;
+} */
+body,html{
+    width: 100%;
+    height: 100%;
+    /* background:rgba(248,248,248,1); */
+}
+#lists .content{
+    margin-top: 12px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    background:rgba(248,248,248,1);
+    /* background:rgba(248,248,248,1); */
+    height: 100vh;
+
+}
+#lists .van-card__desc{
+    display: block;
+    margin-top: 4px;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    /* white-space: nowrap; */
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    text-overflow:ellipsis;
+}
+#lists .content-card{
+   
+}
+#lists .van-card{
+    width:95%;
+    height:126px;
+    opacity: 1;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 3px 3px #F8F8F8;
+}
+#lists .desc_title{
+    display: flex;
+    font-size:14px;
+    font-family:PingFang SC;
+    font-weight:bold;
+    line-height:22px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+}
+#lists .itemPrice{
+    position: absolute;
+    right: 0px;
+    font-size:12px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height: 17px;
+    color:rgba(0,0,0,1);
+    opacity:1;
+    top:30%;
+}
+#lists .detailArrow{
+    line-height: 17px;
+}
+#lists .descs{
+    display: inline-block;
+    margin-top: 8px;
+    font-size:11px;
+    font-family:PingFang SC;
+    font-weight:400;
+    line-height:16px;
+    text-overflow: ellipsis; 
+    color:rgba(175,175,175,1);
+    opacity:1;
+    word-break:normal; 
+    /* width:auto; */
+    width: 48vw;
+    height: 2rem;
+    white-space:pre-wrap;
+    word-wrap : break-word ;
+    overflow: hidden ;
+}
+#lists .van-tabs__wrap{
+    background:rgba(255,255,255,1);
+
+}
+#lists .downIcon{
+    position: absolute;
+    top: 15px;
+    /* left: 60px; */
+}
+#lists .footbar{
+    display: flex;
+}
+#lists .footbar .price{
+    float: left;
+}
+#lists .footbar .status{
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+}
+#lists .status{
+    background:#E37731;
+    padding:2px 20px;
+    border-radius: 10px;
+    color:#fff;
+    margin-right: 8px;
+    margin-top: -7px;
+    background:rgba(227,119,49,1);
+    border:1px solid rgba(227,119,49,1);
+    opacity:1;
+    border-radius:16px;
+    /* margin-bottom:10px */
+}
+#lists .price1{
+    font-size:19px;
+    font-family:PingFang SC;
+    font-weight:400;
+    /* line-height:26px; */
+    color:rgba(217,38,38,1);
+    opacity:1;
+}
+#lists .price{
+    margin-top: -10px;
+}
+#lists .locationIcon{
+    float: left;
+    position: relative;
+    top: 2px;
+    margin-right: 3px;
+    /* display: inline; */
+}
+#lists .van-tabs__line{
+    background-color: transparent;
+}
+#lists .van-tab--active{
+    color: #E37731;
+}
+#lists .van-button::before{
+    background-color: transparent;
+}
+#lists .active{
+    color:#E37731
+}
+#lists .detail{
+    position: absolute;
+    right: 25px;
+    bottom: 40px;
+    color: #000;
+    /* background: #E37731; */
+    border-radius: 10px;
+    border: 1px solid #E37731;
+    padding: 4px 8px;
+}
+#lists .detail i{
+    position: absolute;
+    top: 3px;
+    /* right: 15px; */
+}
+#lists .van-card__thumb{
+    height: 64px;
+    width: 95px;
+}
+#lists .van-notice-bar{
+    height: 27px;
+    margin-top: 8px;
+}
+#lists .van-pull-refresh__track{
+    height: 100%;
+    display: flex;
+   justify-content: center;
+    flex-wrap: wrap;
+}
+#lists{
+    height: 100%;
+    position: relative;
+}
+#lists .van-pull-refresh{
+    height: 100%;
+}
+#lists .van-dropdown-menu__item{
+    height: 44px;
+}
+#lists .van-tabs__content{
+    margin-top: 50px;
+    display: block;
+    /* height: 1000px; */
+    /* margin-bottom: 200px; */
+}
+/* .content{height: 1000px;} */
+
+#lists .van-tabs__wrap{
+    display: fixed;
+    top: 46px;
+    width: 100%;
+}
+#lists .van-nav-bar{
+   /* position: absolute;
+    width: 100%;
+    top: 0px; */
+}
+/* 这是 下划线修改*/
+#lists .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after{
+    border:none;
+}
+

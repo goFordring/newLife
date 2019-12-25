@@ -11,7 +11,7 @@
       is-link
     ></van-cell>
     <div class="btn-box">
-      <van-button class="bottom-btn" @click="confirmOrder" :disabled="disabled">确认接单</van-button>
+      <van-button class="bottom-btn" @click="confirmOrder" :disabled="disabled" color="linear-gradient(to right, #E37731, #FF9100)">确认接单</van-button>
     </div>
     <van-popup
       v-model="showTime"
@@ -216,6 +216,8 @@ h2 {
 }
 .btn-box {
   /* width: 100%; */
+  width:66%;
+  border-radius: 25px;
   display: block;
   margin: 0 20px;
   /* position: ; */

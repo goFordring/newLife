@@ -7,43 +7,44 @@
     <div class="box">
       <!--在这里’遍历 -->
       <div class="workerTime">
-       <van-collapse v-model="activeNameTime">
-         <van-collapse-item :title = workerTimeTitle>
+        <van-collapse v-model="activeNameTime" class="noBorder">
+          <van-collapse-item :title="workerTimeTitle">
             <!-- <p>工时项目:({{ workerItem }})</p> -->
-        <div
-          class="orderPreview"
-          v-for="(item, index) in newworkerTime"
-          :key="index"
-        >
-          <img
-            :src="item.imageSrc"
-            alt=""
-            style="display:inline-block;width:64px;height:64px;flex:1;border-radius:13px;"
-          />
-          <span class="leimu" style="flex:4;padding-left:20px;font-weight:600">
-            {{ item.leimu }}
-          </span>
-          <span class="orderPrice">
-            <span>￥{{ item.orderPrice }}</span>
-          </span>
-        </div>
-
-       
-         </van-collapse-item>
+            <div
+              class="orderPreview"
+              v-for="(item, index) in newworkerTime"
+              :key="index"
+            >
+              <img
+                :src="item.imageSrc"
+                alt=""
+                style="display:inline-block;width:64px;height:64px;flex:1;border-radius:13px;"
+              />
+              <span
+                class="leimu"
+                style="flex:4;padding-left:20px;font-weight:600"
+              >
+                {{ item.leimu }}
+              </span>
+              <span class="orderPrice">
+                <span>￥{{ item.orderPrice }}</span>
+              </span>
+            </div>
+          </van-collapse-item>
           <div class="orderMoney">
-          <span>订单金额:</span>
-          <span style="color:#E37731;margin-left:10px"
-            >￥{{ workerMoney }}</span
-          >
-        </div>
-       </van-collapse>
-       
-      </div><!-- workerTime end-->
+            <span>订单金额:</span>
+            <span style="color:#E37731;margin-left:10px"
+              >￥{{ workerMoney }}</span
+            >
+          </div>
+        </van-collapse>
+      </div>
+      <!-- workerTime end-->
       <!-- 订单信息-->
       <div class="orderMsg">
         <van-collapse v-model="activeName">
           <van-collapse-item title="订单信息:" name="1">
-            <p>   
+            <p>
               <span>订单状态:</span
               ><span style="font-size:14px;">{{ orderStatus }}</span>
             </p>
@@ -71,7 +72,6 @@
             </p>
           </van-collapse-item>
           <van-collapse-item title="门店信息:" name="2">
-             
             <p>
               <span>门店:</span
               ><span style="font-size:14px;" @click="toMap"
@@ -115,7 +115,6 @@
             />
           </van-collapse-item>
           <van-collapse-item title="车辆信息:" name="3">
-         
             <p>
               <span>车辆价格:</span
               ><span style="font-size:14px;">{{ carMsg.carPrice }}</span>
@@ -214,17 +213,19 @@
         <!-- 这是底部按钮 改为待确认圆圈加载动画-->
         <van-button
           v-if="showButton"
-          color="#E37731"
+          color="linear-gradient(to right, #E37731, #FF9100)"
           :text="buttonText"
           class="footerButton"
           @click="buttonFunc"
+          type="info"
         ></van-button>
         <van-button
           v-else
-          color="#E37731"
+          color="linear-gradient(to right, #E37731, #FF9100)"
           class="footerButton"
           loading
           loading-text="门店确认中..."
+          type="info"
         ></van-button>
       </footer>
     </div>
@@ -252,10 +253,10 @@ export default {
       // 门店确认中 控制显示 button
       showButton: true,
       // 手风琴选中标记
-      activeName:[],
-      activeNameTime:[],
+      activeName: [],
+      activeNameTime: [],
       // 工时title
-      workerTimeTitle:'',
+      workerTimeTitle: "",
       // 工时项目
       workerItem: "1",
       imageSrc: "https://img.yzcdn.cn/vant/cat.jpeg",
@@ -362,10 +363,8 @@ export default {
         this.goChooseTime();
       } else if (this.buttonText == "返回首页") {
         this.$router.push("/workerhome");
-
       } else if (this.buttonText == "确认施工完成") {
         // 添加弹窗 是否添加工时
-
 
         Dialog.confirm({
           title: "是否添加工时？",
@@ -385,7 +384,6 @@ export default {
 
         // 控制弹窗
       } else if (this.buttonText == "门店确认中") {
-        
       }
     },
     // 确认施工  接口
@@ -450,7 +448,7 @@ export default {
           // this.orderPrice = res.data.data.Sharelist[0].sharelist_price;
           this.workerMoney = res.data.data.js_money;
           this.workerItem = res.data.data.Sharelist.length;
-          this.workerTimeTitle = `工时项目(${res.data.data.Sharelist.length})`
+          this.workerTimeTitle = `工时项目(${res.data.data.Sharelist.length})`;
           res.data.data.Sharelist.map(item => {
             this.newworkerTime.push({
               imageSrc: `https://gx.budaohuaxia.com${item.sharelist_image}`,
@@ -505,7 +503,7 @@ export default {
     [Dialog.name]: Dialog,
     [CollapseItem.name]: CollapseItem,
     [Collapse.name]: Collapse,
-    [Toast.name]:Toast
+    [Toast.name]: Toast
   }
 };
 </script>
@@ -530,6 +528,11 @@ export default {
   border-radius: 13px;
   margin-top: 30px;
   box-shadow: 0 1px 5px 3px rgba(0, 0, 0, 0.2);
+  
+}
+#pay .workerTime .van-hairline--top-bottom::after, 
+.van-hairline-unset--top-bottom::after {
+    border:none;
 }
 #pay .workerTime p {
   color: black;
@@ -539,8 +542,8 @@ export default {
 #pay .box .workerTime .orderPreview {
   display: flex;
   margin-bottom: 10px;
-  .imagsChange{
-    border-radius: 50%
+  .imagsChange {
+    border-radius: 50%;
   }
 }
 #pay .box .workerTime .orderMoney {
@@ -568,11 +571,12 @@ export default {
 #pay .box .bottomButton {
   margin-top: 30px;
   background-color: pink;
-  width: 95%;
+  width: 66%;
   height: 100%;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 30px;
+  border-radius: 25px;
   box-shadow: 0 1px 5px 4px rgba(0, 0, 0, 0.1);
 }
 #pay .box .bottomButton .footerButton {

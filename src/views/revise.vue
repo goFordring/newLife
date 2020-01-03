@@ -127,7 +127,6 @@ export default {
     //   console.log("ok");
     // }
     // appFinishiLoad();
-
     this.checkedToken(localStorage.getItem("token"));
     // 拉取全门店
     this.$toast.setDefaultOptions({ duration: 800 });
@@ -269,10 +268,22 @@ export default {
       this.$data.jsclass = values;
 
       this.$data.classId = index + 1;
+      if (
+        localStorage.getItem("repair") ||
+        localStorage.getItem("washWorker")
+      ) {
+        // 此时有 选择了
+        if (localStorage.getItem("repair")) {
+          this.jsclassList = ["机修", "喷漆", "钣金", "`改装", "美容装饰"];
+          this.$data.showClass = true;
+        } else if (localStorage.getItem("washWorker")) {
+          this.jsclass = "洗车技师";
+          this.showClass = false;
+        }
+      }
 
-      setTimeout(() => {
-        this.showClass = !this.showClass;
-      }, 800);
+      // setTimeout(() => {
+      // }, 800);
     },
     // 上传头像接口
     afterRead: function(file) {

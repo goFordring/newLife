@@ -77,16 +77,9 @@ export default {
                 }
               });
             } else if (type === 0) {
+              //  此时先去选择技师界面
+              this.$router.push('/chooseworker')
               // 此时信息未完善
-              this.$toast.loading({
-                message: "完善您的信息哦！",
-                forbidClick: true,
-                loadingType: "spinner",
-                onClose() {
-                  that.$router.push("/setworkerinfo");
-                  localStorage.setItem("isLogin", true);
-                }
-              });
             }
             //
           } else if (res.data.code == 1) {

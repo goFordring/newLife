@@ -3,9 +3,6 @@
     <NavBar title="完善信息">
       <van-icon name="../../img/back.png" slot="left" />
     </NavBar>
-    <!-- <div class="topBar">
-            <van-image class="logo" src='../../img/logo-user.png' width='61px' height='61px'></van-image>
-        </div> -->
     <van-uploader
       v-model="fileList"
       accept="image/*"
@@ -18,10 +15,6 @@
       <van-field v-model="username" placeholder="请输入技师名称" />
     </div>
     <div class="password inputbox">
-      <!-- <van-field type="text" v-model="password" placeholder="请输入验证码" /> -->
-      <!-- <van-field v-model="verifyCode" center clearable placeholder="短信验证码"> -->
-      <!-- <van-button slot="button" color="transparent" size="small" @click="getCode" :disabled="isSend" type="primary">{{time}}</van-button> -->
-      <!-- </van-field> -->
       <van-cell
         title="请选择门店"
         @click="chooseStoreNow"
@@ -30,7 +23,6 @@
       />
     </div>
     <div class="password inputbox">
-      <!-- <van-field v-model="psd" type="password" placeholder="请输入密码" /> -->
       <van-cell
         title="请选择技师层级"
         @click="chooseLevelNow"
@@ -39,7 +31,6 @@
       />
     </div>
     <div class="password inputbox">
-      <!-- <van-field v-model="confirmPsd" type="password" placeholder="请再次输入密码" /> -->
       <van-cell
         title="请选择技师分类"
         @click="chooseClassNow"
@@ -83,7 +74,7 @@
 </template>
 <script>
 import NavBar from "../components/NavBar";
-import { Button, Popup, Picker, Cell, Field, Uploader ,Toast} from "vant";
+import { Button, Popup, Picker, Cell, Field, Uploader, Toast } from "vant";
 export default {
   name: "setWorkerInfo",
   data() {
@@ -94,7 +85,7 @@ export default {
       level: "",
       jsclass: "",
       levelList: ["初级技师(三年)", "中级技师(五年)", "高级技师(十年)"],
-      jsclassList: ["机修", "喷漆", "钣金", "改装", "美容装饰", "洗车技师"],
+      jsclassList: ["机修", "喷漆", "钣金", "`改装", "美容装饰", "洗车技师"],
       storeList: [],
       showStore: false,
       showLevel: false,
@@ -107,45 +98,49 @@ export default {
     };
   },
   created() {
-    this.checkedToken(localStorage.getItem('token'))
+    // this.checkedToken(localStorage.getItem("token"));
     // 拉取全门店
-     this.$toast.setDefaultOptions({ duration:800});
+    this.$toast.setDefaultOptions({ duration: 800 });
     this.postStoreInfo();
   },
   methods: {
-    checkedToken(token){
+    checkedToken(token) {
       // 验证token  有效期
-      this.$axios.get( `https://gx.budaohuaxia.com/api/Technician/CarToken?token=${token}`).then(res =>{
-         if(res.data.code == 1009){
-           //  此时token失效 重新登录 
-           //  缓存登录状态 
-            localStorage.removeItem('isLogin')
+      this.$axios
+        .get(
+          `https://gx.budaohuaxia.com/api/Technician/CarToken?token=${token}`
+        )
+        .then(res => {
+          if (res.data.code == 1009) {
+            //  此时token失效 重新登录
+            //  缓存登录状态
+            localStorage.removeItem("isLogin");
 
-           localStorage.setItem('lossToke',1)
-           this.$router.push('/')
-            
-           }
-      })
+            localStorage.setItem("lossToke", 1);
+            this.$router.push("/");
+          }
+        });
     },
-    clickToBack() {
-    },
+    clickToBack() {},
     // 拉取门店全部信息
     postStoreInfo() {
-      let token =  localStorage.getItem('token');
+      let token = localStorage.getItem("token");
       let params = {
-        token,
-      }
+        token
+      };
       this.$axios
-        .post("https://gx.budaohuaxia.com/api/Technician/SharingDd",this.$qs.stringify(params))
+        .post(
+          "https://gx.budaohuaxia.com/api/Technician/SharingDd",
+          this.$qs.stringify(params)
+        )
         .then(res => {
-          console.log(res)
+          console.log(res);
           // 遍历取出
           res.data.data.map(item => {
             this.storeName.push(item.name);
             this.storeList.push(item);
           });
-         this.username =  res.data.Technician.Technician_name
-        
+          this.username = res.data.Technician.Technician_name;
         })
         .catch(err => {
           console.log(err);
@@ -156,10 +151,9 @@ export default {
       this.$data.showStore = true;
     },
     onChooseStore: function(picker, values) {
-  
       this.store = values;
       this.storeId = values;
-     this.$toast(this.store)
+      this.$toast(this.store);
 
       // 过滤数组 拿到Id
       let postStore = this.storeList.filter(item => {
@@ -178,28 +172,38 @@ export default {
     onChooseLevel: function(picker, values, index) {
       this.$data.level = values;
       this.$data.levelId = index + 1;
-      this.$toast(this.$data.level)
-     
+      this.$toast(this.$data.level);
 
       this.showLevel = !this.showLevel;
     },
     // 选择技师分类
     chooseClassNow: function() {
-      this.$data.showClass = true;
+      //  判断此时 缓存是否有数据
+      if (
+        localStorage.getItem("repair") ||
+        localStorage.getItem("washWorker")
+      ) {
+        // 此时有 选择了
+        if (localStorage.getItem("repair")) {
+          this.jsclassList = ["机修", "喷漆", "钣金", "`改装", "美容装饰"];
+          this.$data.showClass = true;
+        } else if (localStorage.getItem("washWorker")) {
+          this.jsclass = "洗车技师";
+          this.showClass = false;
+        }
+      }
+      // this.$data.showClass = true;
     },
     onChooseClass: function(picker, values, index) {
       this.$data.jsclass = values;
-      
       this.$data.classId = index + 1;
-      this.$toast(this.$data.jsclass)
+      this.$toast(this.$data.jsclass);
       this.showClass = !this.showClass;
     },
     // 上传头像接口
     afterRead: function(file) {
-     
       this.image = file.content;
-      localStorage.setItem('oldImage',file.content)
-    
+      localStorage.setItem("oldImage", file.content);
     },
 
     postInfo() {
@@ -231,7 +235,7 @@ export default {
         this.$data.levelId == undefined ||
         this.$data.levelId == null
       ) {
-      this.$toast({
+        this.$toast({
           message: "请选择等级！",
           duration: 800
         });
@@ -242,11 +246,13 @@ export default {
         this.$data.classId == undefined ||
         this.$data.classId == null
       ) {
-        this.$toast({
-          message: "请选择分类!",
-          duration: 800
-        });
-        return false;
+        if (this.jsclass != "洗车技师") {
+          this.$toast({
+            message: "请选择分类!",
+            duration: 800
+          });
+          return false;
+        }
       }
       if (
         this.$data.image == "" ||
@@ -262,29 +268,30 @@ export default {
       let token = localStorage.getItem("token");
       // data参数、
       let data = {
-          technician_name:this.username,
-          sharingmd_id:this.storeId,
-          grade:this.levelId,
-          cate:this.classId,
-          image:this.image,
-          token:token
-      }
-      
-    
-       console.log(data)
+        technician_name: this.username,
+        sharingmd_id: this.storeId,
+        grade: this.levelId,
+        cate: this.classId,
+        image: this.image,
+        token: token
+      };
+
+      console.log(data);
       this.$axios
-        .post('https://gx.budaohuaxia.com//api/Technician/TechnicianUpdate', this.$qs.stringify(data))
+        .post(
+          "https://gx.budaohuaxia.com//api/Technician/TechnicianUpdate",
+          this.$qs.stringify(data)
+        )
         .then(res => {
-          
-        // 判断当前完善信息状态
+          // 判断当前完善信息状态
           this.$toast.loading({
-              message: "资料上传成功",
-              forbidClick: true,
-              loadingType: "spinner",
-              onClose() {
-                that.$router.push("/workerhome");
-              }
-            });
+            message: "资料上传成功",
+            forbidClick: true,
+            loadingType: "spinner",
+            onClose() {
+              that.$router.push("/workerhome");
+            }
+          });
         })
         .catch(err => {
           console.log(err);
@@ -299,7 +306,7 @@ export default {
     [Cell.name]: Cell,
     [Field.name]: Field,
     [Uploader.name]: Uploader,
-    [Toast.name]:Toast
+    [Toast.name]: Toast
   }
 };
 </script>
@@ -307,7 +314,6 @@ export default {
 .ssq .van-cell__value span {
   font-size: 12px;
 }
-
 .confirm-btn {
   width: 70px;
   background-color: #57be69;
@@ -380,13 +386,12 @@ export default {
   padding-left: 0px;
   padding-bottom: 5px;
 }
- .loginbtn{
-   display: flex;
-   justify-content: center;
-   margin-top: 66px;
+.loginbtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 66px;
 }
-.loginbtn .bottom-btn{
-
-    width:90%;
+.loginbtn .bottom-btn {
+  width: 90%;
 }
 </style>

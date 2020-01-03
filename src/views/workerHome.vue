@@ -348,14 +348,17 @@ export default {
     },
     // 转需求列表
     godemandArr() {
+      let that = this;
+      console.log('接单了')
       // 判断当前接单状态
-      if (this.js_zt === 1) {
+      console.log(this.js_zt,this.dqr,this.sgz)
+      if (this.js_zt != 0 || this.yjd != 0 || this.dqr != 0 ||this.sgz != 0) {
         this.$toast.loading({
           message: "一次只能接一单哦",
           forbidClick: true,
           loadingType: "spinner",
           onClose() {
-            that.$router.push("/");
+            return false
           }
         });
       } else {
@@ -392,10 +395,8 @@ export default {
           this.imageSrc = `https://gx.budaohuaxia.com/${res.data.data.data[0].image}`;
           this.workerId = res.data.data.data[0].uid;
           this.workerName = res.data.data.data[0].name;
+          console.log(res)
           this.js_zt = res.data.zt;
-          console.log(
-            this.js_zt
-          )
           //  初始化标签  控制 弹窗调用 
           if(this.js_zt != '0'){
             // 此时有订单 显示

@@ -7,19 +7,24 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/cashdetail',
-    name:'cashdetail',
-    component:()=>import('../views/wallet/cashDetail.vue')
+    path:'/chooseworker',
+    name:'chooseworker',
+    component:()=>import('../views/chooseWorker.vue')
   },
   {
-    path:'/cash',
-    name:'cash',
-    component:()=>import('../views/wallet/getCash.vue')
+    path: '/cashdetail',
+    name: 'cashdetail',
+    component: () => import('../views/wallet/cashDetail.vue')
   },
   {
-    path:"/bill",
-    name:'bill',
-    component:() => import('../views/wallet/bill.vue')
+    path: '/cash',
+    name: 'cash',
+    component: () => import('../views/wallet/getCash.vue')
+  },
+  {
+    path: "/bill",
+    name: 'bill',
+    component: () => import('../views/wallet/bill.vue')
   },
   //  这是隐私 页面
   {
@@ -184,33 +189,41 @@ const router = new VueRouter({
 // //to.path 目标路由
 // //next 必须有否则程序不会继续执行
 // // if(to.path !== '/inspectNumbers' && !tokensign) { return next('/inspectNumbers') }else{
-    
+
 // // }
 // //     next()
 
 // })
-router.beforeEach((to,from,next) =>{
-   //  判断当前登录状态
-   if(localStorage.getItem('token')){
-    
-     next()
-   }else{
-     // 此时没有登录状态
+router.beforeEach((to, from, next) => {
+  //  判断当前登录状态
+  if (localStorage.getItem('token')) {
+
+    next()
+  } else {
+    // 此时没有登录状态
     //  if(to.path =='/'){
     //    next();
     //  }else{
     //    next('/')
     //  }
-    if(to.path == '/password'){
+    if (to.path == '/password') {
       next();
-   }else if(to.path == '/verificationcode'){
+    } else if (to.path == '/verificationcode') {
       next();
-   }else if(to.path == '/'){
-    next();
-   }else{
-     next('/')
-   }
-   }
+    } else if (to.path == '/findpadp') {
+      next();
+    } else if (to.path == '/') {
+      next();
+    } else if(to.path == '/findpadv'){
+      next();
+    }else if(to.path == '/resetworkerpsd'){
+      next();
+    }else if(to.path == '/setworkerinfo'){
+      next();
+    }else {
+      next('/')
+    }
+  }
 })
 
 const originalPush = VueRouter.prototype.push

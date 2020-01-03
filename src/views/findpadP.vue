@@ -54,7 +54,7 @@ export default {
     };
   },
   mounted() {
-    this.checkedToken(localStorage.getItem('token'));
+    // this.checkedToken(localStorage.getItem('token'));
     // 轻弹窗默认 持续时间
    this.$toast.setDefaultOptions({ duration:500});
   },

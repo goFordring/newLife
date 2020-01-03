@@ -70,13 +70,12 @@ export default {
       
       let {token} = res.data;
       // 缓存token
-     
-      localStorage.setItem('fanalKey',token);
+      localStorage.setItem('token',token);
       //判断 code
       let {code} = res.data
       if(code === 0){
         // 注册成功转到 完善信息
-        this.$router.push('/setuserinfo')
+         this.$router.push('/chooseworker')
       }
     }).catch(err =>{
       console.log(err)

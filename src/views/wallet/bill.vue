@@ -102,8 +102,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bill {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height:100vh;
+  background-color: #F8F8F8;
   .container {
     display: flex;
     height: 100%;
@@ -111,15 +112,18 @@ export default {
     align-items: center;
     .billBoxs {
       width: 95%;
+      border-radius: 8px;
       display: flex;
-      padding-bottom: 15px;
-      justify-content: space-between;
+      justify-content: center;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      margin-bottom: 10px;
+      background-color: white;
       .billBox {
         width: 95%;
         display: flex;
-        padding-bottom: 15px;
         justify-content: space-between;
-        border-bottom: 1px solid rgba(230, 230, 230, 1);
+        // border-bottom: 1px solid rgba(230, 230, 230, 1);
 
         .leftTitle {
           display: flex;
@@ -134,6 +138,7 @@ export default {
             font-size: 12px;
           }
           .billClss {
+            text-align: right;
             font-size: 12px;
           }
           .add {
@@ -142,6 +147,10 @@ export default {
         }
       }
     }
+  }
+  // 这是下方小横线
+  .van-divider::after, .van-divider::before{
+    border: none;
   }
 }
 #navigator .topnav {
@@ -157,6 +166,7 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  background-color: white;
 }
 .bill .topnav .topBox .back {
   flex: 1;

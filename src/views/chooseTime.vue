@@ -11,7 +11,11 @@
       is-link
     ></van-cell>
     <div class="btn-box">
-      <van-button class="bottom-btn" @click="confirmOrder" :disabled="disabled" color="linear-gradient(to right, #E37731, #FF9100)">确认接单</van-button>
+      <div class ="buttonBox">
+     
+        <van-button class="bottom-btn" @click="confirmOrder" :disabled="disabled" color="linear-gradient(to right, #E37731, #FF9100)">确认接单</van-button>
+      </div>
+      
     </div>
     <van-popup
       v-model="showTime"
@@ -69,6 +73,7 @@ export default {
   created() {
     this.checkedToken(localStorage.getItem("token"));
     this.$toast.setDefaultOptions({ duration: 500 });
+    console.log(this.$router.history.current.params.orderId)
   },
   methods: {
     // 验证token
@@ -210,17 +215,19 @@ h2 {
   height: 36px;
   color: #fff;
   line-height: 36px;
-  border-radius: 5px;
+  // border-radius: 5px;
   background: #e37731;
   /* margin: 0px 20px; */
+  border-radius: 25px;
 }
 .btn-box {
   /* width: 100%; */
-  width:66%;
-  border-radius: 25px;
-  display: block;
-  margin: 0 20px;
-  /* position: ; */
-  margin-top: 50vh;
+  display:flex;
+  justify-content:center;
+  width:100%;
+  margin-top:26vh;
+  .buttonBox{
+    width:66%;
+  }
 }
 </style>

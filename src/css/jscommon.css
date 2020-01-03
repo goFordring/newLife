@@ -1077,12 +1077,11 @@ body,html{
    
 }
 #lists .van-card{
-    width:95%;
+    /* width:95%; */
     height:126px;
     opacity: 1;
     border-radius: 8px;
     background: #fff;
-    box-shadow: 0 0 3px 3px #F8F8F8;
 }
 #lists .desc_title{
     display: flex;
@@ -1156,6 +1155,7 @@ body,html{
     border:1px solid rgba(227,119,49,1);
     opacity:1;
     border-radius:16px;
+
     /* margin-bottom:10px */
 }
 #lists .price1{
@@ -1170,10 +1170,9 @@ body,html{
     margin-top: -10px;
 }
 #lists .locationIcon{
-    float: left;
-    position: relative;
-    top: 2px;
-    margin-right: 3px;
+    /* float: left; */
+    /* position: relative; */
+    /* top: 2px; */
     /* display: inline; */
 }
 #lists .van-tabs__line{

@@ -48,7 +48,7 @@ export default {
     };
   },
   mounted() {
-    this.checkedToken(localStorage.getItem('token'));
+    // this.checkedToken(localStorage.getItem('token'));
     this.$toast.setDefaultOptions({ duration: 500 });
   },
   methods: {

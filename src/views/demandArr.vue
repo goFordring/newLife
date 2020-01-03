@@ -37,38 +37,54 @@
     <div class="content">
       <van-cell-group class="content-card">
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-          <van-card
+          <div
+            class="cardForBox"
             v-for="(item, index) in resultData"
-            :thumb="item.Car.brand_image"
             :key="index"
-            @click="toDetail(item.id)"
           >
-            <!-- item.Car.brand_name-->
-            <div slot="title" class="desc_title">
-              {{ item.Sharingmd[0].name }}
-              <div class="itemPrice">
-                <span>{{ item.juli }}km</span>
-                <img
-                  class="locationIcon"
-                  src="../assets/img/location.png"
-                  width="8.17px"
-                  height="12.27px"
-                  alt=""
-                />
+            <div class="boxTitle">
+              <span><img src="../assets/img/shop.png"/>{{item.Sharingmd[0].name}}</span>
+              <span class="orderStatus" v-if="item.status == 1">待接单</span>
+              <span class="orderStatus" v-if="item.status == 2">施工完成</span>
+              <span class="orderStatus" v-if="item.status == 5">门店确认中</span>
+              <span class="orderStatus" v-if="item.status == 3">已完成</span>
+            </div>
+            <van-card :thumb="item.Car.brand_image" @click="toDetail(item.id)">
+              <!-- item.Car.brand_name-->
+              <div slot="title" class="desc_title">
+                {{ item.Car.brand_name }}
               </div>
-            </div>
-            <div slot="desc" class="carMsg">
-              <span class="">车型: {{ item.Car.brand_name }}</span>
-              <span class="">负责人: {{ item.Sharingmd[0].fuzeren }}</span>
-            </div>
-            <div slot="footer" class="footbar">
-              <div class="price">
-                <span>工时费:</span>
-                <span class="price1">￥{{ item.js_money }}</span>
+              <div slot="desc" class="carMsg">
+                <span class="">发布时间: {{ item.time }}</span>
+                <span class="">负责人: {{ item.Sharingmd[0].fuzeren }}</span>
               </div>
-              <div class="status">接单</div>
+              <div slot="footer" class="footbar">
+                <div class="itemPrices">
+                  <img
+                    class="locationIcon"
+                    src="../assets/img/location.png"
+                    width="8.17px"
+                    height="12.27px"
+                    alt=""
+                  />
+                  <span>距离: {{ item.juli }}km</span>
+                </div>
+                <div class="price">
+                  <span>合计:</span>
+                  <span class="price1">￥{{ item.js_money }}</span>
+                </div>
+
+                <!-- <div class="status">接单</div> -->
+              </div>
+            </van-card>
+            <div class="footerButton">
+              <span v-if="true" @click="toDetail(item.id)">查看详情</span>
+              <span @click="addWorkerHours(item.id)" v-if="item.status == 5">二次工时</span>
+              <span v-if="item.id == 2" class="confirm">确认完成</span>
+              <span class="confirm" @click="toChooseTime(item.id)" v-if="item.status == 1">接单</span
+              >
             </div>
-          </van-card>
+          </div>
         </van-pull-refresh>
       </van-cell-group>
     </div>
@@ -145,6 +161,8 @@ export default {
         { text: "10km", value: 10 },
         { text: "1000km", value: 1000 }
       ],
+      //  显示二次工时
+      showWorkersHoues: false,
       // 这是距离显示标题
       options2: [{ text: "距离", value: "a" }]
     };
@@ -154,11 +172,10 @@ export default {
   },
   mounted() {
     this.page = 1;
+    this.getLocation();
     this.getList();
-
     // 验证token
     this.checkedToken(localStorage.getItem("token"));
-    this.getLocation();
     this.$toast.setDefaultOptions({ duration: 1000 });
   },
   components: {
@@ -182,12 +199,31 @@ export default {
     this.page = 1;
     window.removeEventListener("scroll", this.scrollhandle, false);
     this.$toast.clear();
-    console.log(this.page);
+    // console.log(this.page);
     this.onMove = true;
     this.getList = function() {};
-    console.log(this.getList());
+    // console.log(this.getList());
   },
   methods: {
+    // 接单选择订单时间
+    toChooseTime(id) {
+      console.log("点了");
+      this.$router.push({
+        name: "choosetime",
+        params: {
+          orderId: id
+        }
+      });
+    },
+    // 去二次工时
+    addWorkerHours(id) {
+      this.$router.push({
+        name: "workershours",
+        params: {
+          orderId: id
+        }
+      });
+    },
     scrollHandle() {
       let that = this;
       // 获取页面页面的滚动高度
@@ -203,20 +239,6 @@ export default {
         document.documentElement.clientHeight || document.body.clientHeight;
       // 我们可以在这里判断页面的滚动是否到了底部
       if (Math.ceil(scrollTop) + clientHeight === scrollHeight) {
-        // console.log(this.page++);
-        // this.page+=1;
-        // this.$toast.loading({
-        //   message: `正在加载中！`,
-        //   forbidClick: true,
-        //   loadingType: "spinner",
-        //   onClose() {
-        //     // that.$router.push("/password");
-        //     // return false
-        //     // console.log(that.page)
-        //     // that.getList();
-        //   }
-        // });
-
         //
         if (this.flag) return;
         this.flag = true;
@@ -278,9 +300,6 @@ export default {
     // 去详情页val传入订单id
     toDetail: function(id) {
       let that = this;
-      // localStorage.setItem("orderId", val);
-      // window.location = "../orderDetail/orderDetail.html?";
-      // this.$router.push('/orderdetail')
       localStorage.setItem("orderId", id);
       this.$toast.loading({
         message: "加载中",
@@ -289,9 +308,6 @@ export default {
         onClose() {
           that.$router.push({
             name: "orderdetail"
-            // params:{
-            //   orderId:id
-            // }
           });
         }
       });
@@ -299,6 +315,7 @@ export default {
     // 获取订单列表
     getList: function() {
       let that = this;
+      console.log(this.lng)
       // alert(this.$data.lng)
       let url = "https://gx.budaohuaxia.com/api/Map/Demands";
       let params = {
@@ -317,7 +334,7 @@ export default {
             newArr.push(item);
           });
           this.$toast.loading({
-            message: `刷新中`,
+            message: `订单加载中`,
             forbidClick: true,
             loadingType: "spinner",
             onClose() {
@@ -353,33 +370,6 @@ export default {
             res.data.data[key].Car.brand_image =
               "https://gx.budaohuaxia.com" + res.data.data[key].Car.brand_image;
           }
-          //   if (this.$data.nowPage == 0) {
-          //     // this.$data.nowPage = this.$data.page
-          //     this.$data.resultData = res.data.data;
-          //     this.$data.nowPage = 1;
-          //     setInterval(function() {
-          //       // this.getNewList();
-          //     }, 2000);
-          //   } else if (this.$data.hasNew) {
-          //     this.$data.resultData = res.data.data;
-          //     this.$data.nowPage = 1;
-          //   } else if (this.$data.nowPage > this.$data.nowPage) {
-          //     this.$data.resultData.push(res.data.data[key]);
-          //   }
-          //   if (key == res.data.data.length - 1) {
-          //     this.$data.nowPage = this.$data.page;
-          //   }
-          // }
-          // if (this.$data.page > this.$data.nowPage) {
-          //   this.$data.nowPage = this.$data.page;
-          // }
-          // this.$data.storeList = res.data.data;
-          // let data = res.data.data;
-          // console.log(res.data.data[key].Car.brand_image)
-          // }
-          // res.data.data.map(item => {
-          //   this.resultData.push(item);
-          // });
           this.flag = false;
         })
         .catch(err => {
@@ -470,6 +460,7 @@ export default {
   display: flex;
   height: 45px;
   border-bottom: 1px soild;
+  box-shadow: 0 0 3px 3px #f8f8f8;
 }
 #lists .nexttitle .leftTitle {
   width: 50%;
@@ -494,7 +485,9 @@ export default {
   //   background-color: pink;
   //   align-self: flex-end;
 }
-
+.van-dropdown-menu{
+  height: 0;
+}
 .workerMenu .demand {
   flex: 1;
   display: flex;
@@ -503,7 +496,7 @@ export default {
 }
 .workerMenu .demand:active {
   color: #e37731;
-  background-color: #f8f8f8;
+  // background-color: #f8f8f8;
 }
 
 .workerMenu .mine {
@@ -526,6 +519,88 @@ export default {
     color: #676767;
     font-size: 12px;
     margin-top: 6px;
+  }
+}
+.content {
+  .content-card {
+    .footbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      .itemPrices {
+        .locationIcon {
+          margin-right: 10px;
+        }
+      }
+      .price {
+        .price1 {
+          margin-left: 10px;
+        }
+      }
+    }
+    .cardForBox {
+      width: 95%;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      // background-color: white;
+      box-shadow: 0 0 3px 3px #f8f8f8;
+      border-radius: 5px;
+      //  底部新按钮
+      .footerButton {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        padding-right: 10px;
+        span {
+          width: 68px;
+          height: 24px;
+          margin-left: 10px;
+          text-align: center;
+          line-height: 24px;
+          font-size: 12px;
+          border: 0.6px solid #666666;
+          border-radius: 2px;
+        }
+        // 确认订单完成
+        .confirm {
+          background-color: #e37731;
+          color: #ffffff;
+          border: none;
+        }
+        // 接单
+        .receipt {
+        }
+      }
+      // 新卡片标题
+      .boxTitle {
+        // padding: 15px;
+        padding-top: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        color: #333333;
+        border-bottom:1px solid #EDEDED;
+        margin-left: 10px;
+        margin-right: 10px;
+        // 右侧订单状态
+        .orderStatus {
+          font-size: 12px;
+          color: #e37731;
+        }
+        img {
+          display: inline-block;
+          margin-left: 10px;
+          margin-right: 10px;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
   }
 }
 </style>

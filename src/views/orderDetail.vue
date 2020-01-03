@@ -208,7 +208,6 @@
           ><span style="padding-left:120px;">合计:￥{{ allMoney }}</span>
         </div>
       </div>
-
       <footer class="bottomButton">
         <!-- 这是底部按钮 改为待确认圆圈加载动画-->
         <van-button
@@ -222,9 +221,8 @@
         <van-button
           v-else
           color="linear-gradient(to right, #E37731, #FF9100)"
+          text = '门店确认中'
           class="footerButton"
-          loading
-          loading-text="门店确认中..."
           type="info"
         ></van-button>
       </footer>
@@ -251,7 +249,7 @@ export default {
   data() {
     return {
       // 门店确认中 控制显示 button
-      showButton: true,
+      showButton:true,
       // 手风琴选中标记
       activeName: [],
       activeNameTime: [],
@@ -282,7 +280,7 @@ export default {
       carMsg: {
         carPrice: "8-9",
         Model: "解放",
-        vehicleAge: "10年内",
+        vehicleAge:null,
         gearPosition: "自动挡",
         carNumber: "鲁B88888"
       },
@@ -467,8 +465,8 @@ export default {
           this.address = res.data.data.Sharingmd.address;
           // 车辆信息
           this.carMsg.carPrice = res.data.data.Car.brand_price;
+          this.carMsg.vehicleAge  = res.data.data.cnx;
           this.carMsg.Model = res.data.data.Car.brand_name;
-          //   this.carMsg.carNumber = res.data.data.Car.brand_name;
           //   判断当前订单状态
           if (res.data.data.status == 0) {
             this.orderStatus = "未审核";
@@ -485,7 +483,7 @@ export default {
             this.buttonText = "返回首页";
             this.orderStatus = "已接单";
           } else if (res.data.data.status == 5) {
-            this.buttonText = "门店确认中";
+            this.buttonText = "等待门店确认";
             this.showButton = !this.showButton;
             this.orderStatus = "技师完成";
           }

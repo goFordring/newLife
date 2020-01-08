@@ -1,8 +1,15 @@
 <template>
   <div id="confirm">
-    <van-nav-bar title="接单">
-      <van-icon name="arrow-left" slot="left" @click="clickToback" />
-    </van-nav-bar>
+      <div class="topnav">
+      <div class="topBox">
+        <span class="back" @click="back">
+          <van-icon name="arrow-left" size="25px" />
+        </span>
+        <span class="title">
+          选择时间
+        </span>
+      </div>
+    </div>
     <h2>请选择到店时间</h2>
     <van-cell
       title="到店时间"
@@ -11,11 +18,13 @@
       is-link
     ></van-cell>
     <div class="btn-box">
-      <div class ="buttonBox">
-     
-        <van-button class="bottom-btn" @click="confirmOrder" :disabled="disabled" color="linear-gradient(to right, #E37731, #FF9100)">确认接单</van-button>
+      <div class="buttonBox">
+        <van-button
+          class="bottom-btn"
+          @click="confirmOrder"
+          :disabled="disabled"
+          color="linear-gradient(to right, #E37731, #FF9100)">确认接单</van-button>
       </div>
-      
     </div>
     <van-popup
       v-model="showTime"
@@ -71,11 +80,13 @@ export default {
     };
   },
   created() {
-    this.checkedToken(localStorage.getItem("token"));
-    this.$toast.setDefaultOptions({ duration: 500 });
-    console.log(this.$router.history.current.params.orderId)
+    // this.checkedToken(localStorage.getItem("token"));
+    this.$toast.setDefaultOptions({ duration: 1000 });
   },
   methods: {
+    back(){
+      this.$router.push('/demandarr')
+    },
     // 验证token
     checkedToken(token) {
       // 验证token  有效期
@@ -88,7 +99,6 @@ export default {
             //  此时token失效 重新登录
             //  缓存登录状态
             localStorage.removeItem("isLogin");
-
             localStorage.setItem("lossToke", 1);
             this.$router.push("/");
           }
@@ -141,33 +151,25 @@ export default {
     },
     confirmOrder: function() {
       let that = this;
-      this.$axios
-        .get(
-          `https://gx.budaohuaxia.com/api/Technician/TechnicianOrder?demand_id=${
-            this.$router.history.current.params.orderId
-          }&token=${localStorage.getItem("token")}&js_ddsj=${this.arriveTime}`
-        )
-        .then(res => {
+      this.$axios.get(`https://gx.budaohuaxia.com/api/Technician/TechnicianOrder?demand_id=${this.$router.history.current.params.orderId}&token=${localStorage.getItem("token")}&js_ddsj=${this.arriveTime}`).then(res => {
           if (res.data.code == 0) {
             // 技师接单成功 刷新页面
-            //    localStorage.setItem('orderId',this.$router.history.current.params.orderId)
-
             this.$toast.loading({
               message: "接单成功",
               forbidClick: true,
               loadingType: "spinner",
               onClose() {
-                that.$router.push("/orderdetail");
+                that.$router.push({name:'orderprocess',params:{name:'4'}})
+                that.disabled = true;
               }
             });
-            // vant.Toast(res.data.msg);
-          } else if (res.data.data == 1) {
+          } else if (res.data.code == 1) {
             this.$toast.loading({
               message: "接单失败",
               forbidClick: true,
               loadingType: "spinner",
               onClose() {
-                that.$router.push("/orderdetail");
+                that.$router.push("/workerhome");
               }
             });
           }
@@ -222,12 +224,40 @@ h2 {
 }
 .btn-box {
   /* width: 100%; */
-  display:flex;
-  justify-content:center;
-  width:100%;
-  margin-top:26vh;
-  .buttonBox{
-    width:66%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 26vh;
+  .buttonBox {
+    width: 66%;
   }
+}
+ .topnav {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+}
+ .topnav .topBox {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: white;
+}
+ .topnav .topBox .back {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+ .topnav .topBox .title {
+  font-size: 18px;
+  font-weight: 600;
+  transform: translateX(-10%);
+  text-align: center;
+  flex: 5;
 }
 </style>

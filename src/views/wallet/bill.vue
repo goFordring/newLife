@@ -103,11 +103,11 @@ export default {
 <style lang="scss" scoped>
 .bill {
   width: 100%;
-  height:100vh;
+  
   background-color: #F8F8F8;
   .container {
     display: flex;
-    height: 100%;
+    // height: 100vh;
     flex-direction: column;
     align-items: center;
     .billBoxs {

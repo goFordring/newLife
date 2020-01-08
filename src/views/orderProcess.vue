@@ -1,8 +1,16 @@
 <template>
   <div class="orderProcess">
-    <NavBar title="订单追踪">
-      <van-icon name="../../img/back.png" slot="left" />
-    </NavBar>
+    <div class="topnav">
+       <div class="topBoxs">
+        <span class="back" @click="goHome">
+          <van-icon name="arrow-left" size="25px" />
+        </span>
+        <span class="title">
+          订单状态
+        </span>
+      </div>
+    </div>
+   
     <van-tabs
       v-model="activeName"
       color="#E37731"
@@ -229,7 +237,7 @@
 </template>
 <script>
 import NavBar from "../components/NavBar";
-import { Tab, Tabs, Icon, Cell, CellGroup, Divider } from "vant";
+import { Tab, Tabs, Icon, Cell, CellGroup, Divider ,Toast} from "vant";
 export default {
   name: "orderProcess",
   data() {
@@ -251,6 +259,10 @@ export default {
   },
 
   methods: {
+    
+    goHome(){
+      this.$router.push('/workerhome')
+    },
     //  确认订单完成 直接完成不添加二次工时
       confrimWork(orderIds) {
       let token = localStorage.getItem("token");
@@ -323,11 +335,8 @@ export default {
           `https://gx.budaohuaxia.com/api/Technician/StoreStatus?token=${this.token}&status=${id}&lng=${localStorage.getItem('lnglat')}`
         )
         .then(res => {
-          console.log(res);
-          // console.log(this.orderMsg)
           this.orderMsg.splice(0, this.orderMsg.length);
           res.data.data.map(item => {
-            // console.log(item)
             let orderSs = "";
             if (item.status == 0) {
               orderSs = "未审核";
@@ -342,8 +351,6 @@ export default {
             } else if (item.status == 5) {
               orderSs = "待确认";
             }
-            console.log(item);
-            // this.orderMsg = [];
             // 问题出现在这里`
             this.orderMsg.push({
               imageSrc: `https://gx.budaohuaxia.com${item.Car.brand_image}`,
@@ -360,11 +367,8 @@ export default {
               status:item.status
             });
    
-            // console.log(this.orderMsg[0])
-            // console.log(this.orderMsg.length)
           }
           );
-          console.log(this.orderMsg)
         });
     }
   },
@@ -375,7 +379,8 @@ export default {
     [Icon.name]: Icon,
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
-    [Divider.name]: Divider
+    [Divider.name]: Divider,
+    [Toast.name]:Toast
   }
 };
 </script>
@@ -545,5 +550,33 @@ export default {
   text-align: center;
   margin-top: 25px;
   font-size: 18px;
+}
+// 头部导航栏  
+.orderProcess .topnav {
+
+  width: 100%; 
+  height: 45px;
+  background-color: white;
+}
+.orderProcess .topnav .topBoxs {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom:8px;
+  background-color: white;
+}
+.orderProcess .topnav .topBoxs .back {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+.orderProcess .topnav .topBoxs .title {
+  font-size: 16px;
+  font-weight: 600;
+  transform: translateX(-10%);
+  text-align: center;
+  flex: 5;
 }
 </style>

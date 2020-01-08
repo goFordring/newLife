@@ -8,7 +8,6 @@
           请求数据
         -->
     <van-notice-bar
-      @click="refreshList"
       v-if="hasNew"
       text="通知内容"
       left-icon="volume-o"
@@ -81,8 +80,7 @@
               <span v-if="true" @click="toDetail(item.id)">查看详情</span>
               <span @click="addWorkerHours(item.id)" v-if="item.status == 5">二次工时</span>
               <span v-if="item.id == 2" class="confirm">确认完成</span>
-              <span class="confirm" @click="toChooseTime(item.id)" v-if="item.status == 1">接单</span
-              >
+              <span class="confirm" @click="toChooseTime(item.id)" v-if="item.status == 1">接单</span>
             </div>
           </div>
         </van-pull-refresh>
@@ -172,8 +170,8 @@ export default {
   },
   mounted() {
     this.page = 1;
-    this.getLocation();
-    this.getList();
+    // this.getLocation();
+    this.getList(localStorage.getItem('lnglat'))
     // 验证token
     this.checkedToken(localStorage.getItem("token"));
     this.$toast.setDefaultOptions({ duration: 1000 });
@@ -199,21 +197,18 @@ export default {
     this.page = 1;
     window.removeEventListener("scroll", this.scrollhandle, false);
     this.$toast.clear();
-    // console.log(this.page);
     this.onMove = true;
     this.getList = function() {};
-    // console.log(this.getList());
   },
   methods: {
     // 接单选择订单时间
-    toChooseTime(id) {
-      console.log("点了");
-      this.$router.push({
-        name: "choosetime",
-        params: {
-          orderId: id
-        }
-      });
+    toChooseTime(id){
+       //  判断此时有订单 判断变量直接拦截订单   
+       console.log(this.$router)
+       this.$router.push({name:'choosetime',params:{
+           orderId:id
+         }})
+      
     },
     // 去二次工时
     addWorkerHours(id) {
@@ -246,7 +241,7 @@ export default {
         // 根据noMore 看是否还有数据  默认为false
         if (!this.noMore) {
           // 滚动到底部执行数据加载
-          this.getList();
+        this.getList(localStorage.getItem('lnglat'))
         }
       }
       // return false
@@ -262,7 +257,6 @@ export default {
             //  此时token失效 重新登录
             //  缓存登录状态
             localStorage.removeItem("isLogin");
-
             localStorage.setItem("lossToke", 1);
             this.$router.push("/");
           }
@@ -274,7 +268,7 @@ export default {
         this.$data.page++;
       }
       //   this.$toast("加载中");
-      this.getList();
+          this.getList(localStorage.getItem('lnglat'))
     },
     // 后退
     clickToBack() {
@@ -294,7 +288,8 @@ export default {
       this.value1 = value;
       this.resultData.length = 0;
       this.page = 1;
-      this.getList();
+      this.getList(localStorage.getItem('lnglat'))
+
     },
 
     // 去详情页val传入订单id
@@ -313,22 +308,19 @@ export default {
       });
     },
     // 获取订单列表
-    getList: function() {
+    getList: function(lng) {
       let that = this;
-      console.log(this.lng)
       // alert(this.$data.lng)
       let url = "https://gx.budaohuaxia.com/api/Map/Demands";
       let params = {
         page: this.page, //数据页码
         jl: this.value1, // 距离
-        lng: this.lng // 经纬度
+        lng// 经纬度
       };
-      console.log(this.value1);
       this.$axios
         .get(url, { params })
         .then(res => {
           // 判断当前 数据是否为空 是否继续请求
-          // console.log(this.resultData)
           let newArr = [];
           res.data.data.map(item => {
             newArr.push(item);
@@ -344,12 +336,7 @@ export default {
               });
             }
           });
-
-          // this.newArr.map(lis =>{
-          //   this.resultData.push(lis)
-          // })
           if (res.data.data.length === 0) {
-            // console.log('此时数据为空停止请求')
             // 弹窗提示 没有更多订单了
             this.$toast.loading({
               message: `没有更多订单了`,
@@ -362,9 +349,6 @@ export default {
             this.onMove = true;
           } else {
           }
-          // this.resultData = res.data.data.filter((item, index) => {
-          //   return item.juli < this.value1;
-          // });
 
           for (let key in res.data.data) {
             res.data.data[key].Car.brand_image =
@@ -380,7 +364,7 @@ export default {
     onRefresh() {
       let that = this;
       this.$data.page = 1;
-      this.getList();
+          this.getList(localStorage.getItem('lnglat'))
       // setTimeout(() => {
       this.$toast.loading({
         message: "刷新成功！",
@@ -391,24 +375,6 @@ export default {
           that.$data.isLoading = false;
         }
       });
-
-      //   // this.count++;
-      // }, 500);
-    },
-    // 刷新列表，这里我忘记有啥用了，你自己研究一下
-    refreshList() {
-      this.$data.page = 1;
-      this.getList();
-      // vant.Toast('刷新成功');
-      this.$toast.loading({
-        message: "刷新成功！",
-        forbidClick: true,
-        loadingType: "spinner",
-        onClose() {
-          that.$router.push("/password");
-        }
-      });
-      this.$data.hasNew = false;
     },
     // 定位函数、
     getLocation() {
@@ -440,7 +406,7 @@ export default {
 
           that.lng = lngs.toString() + "," + lats.toString();
           // 调用请求数据
-          that.getList();
+          // that.getList();
         }
 
         function onError(data) {

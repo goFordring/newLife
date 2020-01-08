@@ -167,7 +167,9 @@ export default {
       zdd: null,
       //施工中
       sgz: null,
-      show: true
+      show: true,
+      // 新的经纬度
+      lnglat: ""
     };
   },
   created() {
@@ -175,23 +177,25 @@ export default {
     // 调用函数 拉取数据
     this.audio = new Audio("/newmsg.mp3");
     this.audio.src = "/newmsg.mp3";
-
     //取token
     let token = localStorage.getItem("token");
     this.checkedToken(localStorage.getItem("token"));
     this.getWorkerMsg(localStorage.getItem("token"));
     this.$toast.setDefaultOptions({ duration: 1000 });
     // this.getNewOrder();
-    // 开启循环
+    // 开启循环npm
     // clearInterval(this.timeId)
     this.timers = window.setInterval(() => {
       this.getNewOrder();
+      // 请求数据
+      this.getWorkerMsg(localStorage.getItem("token"));
     }, 8000);
     // this.setGet();
   },
   mounted() {
+  
     //  监控当前页面变化
-   
+
     if (localStorage.getItem("showHomeToast")) {
       this.$toast.loading({
         message: "验证中",
@@ -203,23 +207,17 @@ export default {
         }
       });
     }
-    if(localStorage.getItem('showJsConfirm') == '2'){
-      return false   
-    }else{
+    if (localStorage.getItem("showJsConfirm") == "2") {
+      return false;
+    } else {
       this.judgeOrder();
     }
-  
-    // 测试方法
-    //  window.methodName = this.methodName;
-    // window.methodName = this.methodName
   },
   beforeDestroy() {
     window.clearInterval(this.timers);
     this.audio.pause();
   },
   methods: {
-      
-    // 监控当前页面 滑动 距离大于 1260  时请求数据
     // 进入首页判断当前 是否为接单状态
     judgeOrder() {
       //  取出标记
@@ -230,7 +228,7 @@ export default {
           message: "您当前有订单正在进行中是否查看当前订单状态"
         })
           .then(() => {
-            localStorage.setItem("showJsConfirm", '2');
+            localStorage.setItem("showJsConfirm", "2");
             //  此时点击确认 转到订单追踪页面
             // 判断当前点击 是那个订单分类...
             if (this.yjd == 1) {
@@ -299,9 +297,15 @@ export default {
         .get(`https://gx.budaohuaxia.com/api/Technician/CarTokens`)
         .then(res => {
           if (res.data.msg > 0) {
-            // 播放音乐
-            //  window.methodName()
+            
+           
+       if (this.js_zt != 0 || this.yjd != 0 || this.dqr != 0 || this.sgz != 0) {
+          // 停止播放音乐
+      }else{
             this.audio.play();
+      }
+  
+           
           } else {
             window.clearInterval(this.timers);
           }
@@ -335,8 +339,8 @@ export default {
       let that = this;
       localStorage.removeItem("token");
       localStorage.removeItem("isLogin");
-      localStorage.setItem('showJsConfirm','1')
-      
+      localStorage.setItem("showJsConfirm", "1");
+
       this.$toast.loading({
         message: "退出中",
         forbidClick: true,
@@ -349,16 +353,14 @@ export default {
     // 转需求列表
     godemandArr() {
       let that = this;
-      console.log('接单了')
       // 判断当前接单状态
-      console.log(this.js_zt,this.dqr,this.sgz)
-      if (this.js_zt != 0 || this.yjd != 0 || this.dqr != 0 ||this.sgz != 0) {
+      if (this.js_zt != 0 || this.yjd != 0 || this.dqr != 0 || this.sgz != 0) {
         this.$toast.loading({
           message: "一次只能接一单哦",
           forbidClick: true,
           loadingType: "spinner",
           onClose() {
-            return false
+            return false;
           }
         });
       } else {
@@ -395,17 +397,15 @@ export default {
           this.imageSrc = `https://gx.budaohuaxia.com/${res.data.data.data[0].image}`;
           this.workerId = res.data.data.data[0].uid;
           this.workerName = res.data.data.data[0].name;
-          console.log(res)
+          console.log(res);
           this.js_zt = res.data.zt;
-          //  初始化标签  控制 弹窗调用 
-          if(this.js_zt != '0'){
+          //  初始化标签  控制 弹窗调用
+          if (this.js_zt != "0") {
             // 此时有订单 显示
-           localStorage.setItem('showDo','1')
-             
-          }else{
-            localStorage.setItem('showDo','2')
+            localStorage.setItem("showDo", "1");
+          } else {
+            localStorage.setItem("showDo", "2");
           }
-
         })
         .catch(err => {});
     }

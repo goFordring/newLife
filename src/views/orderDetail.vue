@@ -221,7 +221,7 @@
         <van-button
           v-else
           color="linear-gradient(to right, #E37731, #FF9100)"
-          text = '门店确认中'
+          text = '等待门店确认中'
           class="footerButton"
           type="info"
         ></van-button>
@@ -320,7 +320,6 @@ export default {
             //  此时token失效 重新登录
             //  缓存登录状态
             localStorage.removeItem("isLogin");
-
             localStorage.setItem("lossToke", 1);
             this.$router.push("/");
           }
@@ -340,7 +339,6 @@ export default {
     goWorkerHours() {
       this.$router.push("/workershours");
     },
-
     // 删除 指定元素
     deleteItem(item, index) {
       this.addtimearr.splice(index, 1);
@@ -363,7 +361,6 @@ export default {
         this.$router.push("/workerhome");
       } else if (this.buttonText == "确认施工完成") {
         // 添加弹窗 是否添加工时
-
         Dialog.confirm({
           title: "是否添加工时？",
           message: "如需添加请点击“确认”"

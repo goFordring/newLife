@@ -22,6 +22,9 @@
 </template>
 
 <script>
+var map = new AMap.Map("container", {
+  resizeEnable: true
+});
 import NavBar from "../components/NavBar";
 import { Button, Image, Field, Icon, Toast } from "vant";
 export default {
@@ -65,6 +68,8 @@ export default {
             localStorage.setItem("token", res.data.token);
             //转到 完善信息
             if (type === 1) {
+              // 获取地理位置
+              this.getLocation();
               // 此时信息完善去首页
               this.$toast.loading({
                 message: "登录成功！",
@@ -94,6 +99,44 @@ export default {
     // 忘记密码
     forgetPsd() {
       this.$router.push("/findpadp");
+    },
+    // 获取地理位置信息
+    getLocation() {
+      let that = this;
+      map.plugin("AMap.Geolocation", function() {
+        var geolocation = new AMap.Geolocation({
+          // 是否使用高精度定位，默认：true
+          enableHighAccuracy: true,
+          // 设置定位超时时间，默认：无穷大
+          timeout: 10000,
+          // 定位按钮的停靠位置的偏移量，默认：Pixel(10, 20)
+          buttonOffset: new AMap.Pixel(10, 20),
+          //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+          zoomToAccuracy: true,
+          //  定位按钮的排放位置,  RB表示右下
+          buttonPosition: "RB"
+        });
+
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, "complete", onComplete);
+        AMap.event.addListener(geolocation, "error", onError);
+
+        function onComplete(data) {
+          // data是具体的定位信息
+          let lngs = data.position.lng;
+          let lats = data.position.lat;
+          // 存入 缓存 这是起点
+          localStorage.setItem("lnglat", [lngs, lats]);
+
+          that.lng = lngs.toString() + "," + lats.toString();
+          // 调用请求数据
+          // that.getList();
+        }
+
+        function onError(data) {
+          // 定位出错
+        }
+      });
     }
   },
   components: {

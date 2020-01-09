@@ -1,7 +1,7 @@
 <template>
   <div class="orderProcess">
     <div class="topnav">
-       <div class="topBoxs">
+      <div class="topBoxs">
         <span class="back" @click="goHome">
           <van-icon name="arrow-left" size="25px" />
         </span>
@@ -10,18 +10,22 @@
         </span>
       </div>
     </div>
-   
+
     <van-tabs
       v-model="activeName"
       color="#E37731"
       title-active-color="#E37731"
       @click="getOrder"
-    >   
+    >
       <van-tab title="全部订单" name="8" data-id="8">
         <div class="box">
           <div class="card" v-for="(item, index) in orderMsg" :key="index">
             <div class="topBox">
-              <span><img src="../assets/img/shop.png" alt="" />{{  item.Sharingmd.name }}</span>
+              <span
+                ><img src="../assets/img/shop.png" alt="" />{{
+                  item.Sharingmd.name
+                }}</span
+              >
               <span class="orderStatus">{{ item.orderStatus }}</span>
             </div>
             <div class="bottomBox">
@@ -29,41 +33,44 @@
                 <div class="imgBox">
                   <span class="image"><img :src="item.imageSrc"/></span>
                   <div class="timeTitle">
-                    <span>{{ item.timeTitle }}</span> 
-                    <span>发布时间:{{item.orderTime}}</span>
-                    <span>负责人:{{item.Sharingmd.fuzeren}}</span>
+                    <span>{{ item.timeTitle }}</span>
+                    <span>发布时间:{{ item.orderTime }}</span>
+                    <span>负责人:{{ item.Sharingmd.fuzeren }}</span>
                   </div>
                 </div>
               </div>
             </div>
-              <div slot="footer" class="footbar">
-                <div class="itemPrices">
-                  <img
-                    class="locationIcon"
-                    src="../assets/img/location.png"
-                    width="8.17px"
-                    height="12.27px"
-                    alt=""
-                  />
-                  <span>距离: {{ item.juli }}km</span>
-                </div>
-                <div class="price">
-                  <span>合计:</span>
-                  <span class="price1">￥{{ item.orderPrice }}</span>
-                </div>
+            <div slot="footer" class="footbar">
+              <div class="itemPrices">
+                <img
+                  class="locationIcon"
+                  src="../assets/img/location.png"
+                  width="8.17px"
+                  height="12.27px"
+                  alt=""
+                />
+                <span>距离: {{ item.juli }}km</span>
               </div>
-             <div class="footerButton">
+              <div class="price">
+                <span>合计:</span>
+                <span class="price1">￥{{ item.orderPrice }}</span>
+              </div>
+            </div>
+            <div class="footerButton">
               <span v-if="true" @click="toDetail(item.id)">查看详情</span>
             </div>
           </div>
-         
         </div>
       </van-tab>
       <van-tab title="已接单" name="4" data-id="4">
         <div class="box">
           <div class="card" v-for="(item, index) in orderMsg" :key="index">
             <div class="topBox">
-              <span><img src="../assets/img/shop.png" alt="" />{{  item.Sharingmd.name }}</span>
+              <span
+                ><img src="../assets/img/shop.png" alt="" />{{
+                  item.Sharingmd.name
+                }}</span
+              >
               <span class="orderStatus">{{ item.orderStatus }}</span>
             </div>
             <div class="bottomBox">
@@ -71,41 +78,44 @@
                 <div class="imgBox">
                   <span class="image"><img :src="item.imageSrc"/></span>
                   <div class="timeTitle">
-                    <span>{{ item.timeTitle }}</span> 
-                    <span>发布时间:{{item.orderTime}}</span>
-                    <span>负责人:{{item.Sharingmd.fuzeren}}</span>
+                    <span>{{ item.timeTitle }}</span>
+                    <span>发布时间:{{ item.orderTime }}</span>
+                    <span>负责人:{{ item.Sharingmd.fuzeren }}</span>
                   </div>
                 </div>
               </div>
             </div>
-              <div slot="footer" class="footbar">
-                <div class="itemPrices">
-                  <img
-                    class="locationIcon"
-                    src="../assets/img/location.png"
-                    width="8.17px"
-                    height="12.27px"
-                    alt=""
-                  />
-                  <span>距离: {{ item.juli }}km</span>
-                </div>
-                <div class="price">
-                  <span>合计:</span>
-                  <span class="price1">￥{{ item.orderPrice }}</span>
-                </div>
+            <div slot="footer" class="footbar">
+              <div class="itemPrices">
+                <img
+                  class="locationIcon"
+                  src="../assets/img/location.png"
+                  width="8.17px"
+                  height="12.27px"
+                  alt=""
+                />
+                <span>距离: {{ item.juli }}km</span>
               </div>
-             <div class="footerButton">
+              <div class="price">
+                <span>合计:</span>
+                <span class="price1">￥{{ item.orderPrice }}</span>
+              </div>
+            </div>
+            <div class="footerButton">
               <span v-if="true" @click="toDetail(item.id)">查看详情</span>
             </div>
           </div>
-         
         </div>
       </van-tab>
       <van-tab title="施工中" name="2" data-id="2">
         <div class="box">
           <div class="card" v-for="(item, index) in orderMsg" :key="index">
             <div class="topBox">
-              <span><img src="../assets/img/shop.png" alt="" />{{  item.Sharingmd.name }}</span>
+              <span
+                ><img src="../assets/img/shop.png" alt="" />{{
+                  item.Sharingmd.name
+                }}</span
+              >
               <span class="orderStatus">{{ item.orderStatus }}</span>
             </div>
             <div class="bottomBox">
@@ -113,32 +123,40 @@
                 <div class="imgBox">
                   <span class="image"><img :src="item.imageSrc"/></span>
                   <div class="timeTitle">
-                    <span>{{ item.timeTitle }}</span> 
-                    <span>发布时间:{{item.orderTime}}</span>
-                    <span>负责人:{{item.Sharingmd.fuzeren}}</span>
+                    <span>{{ item.timeTitle }}</span>
+                    <span>发布时间:{{ item.orderTime }}</span>
+                    <span>负责人:{{ item.Sharingmd.fuzeren }}</span>
                   </div>
                 </div>
               </div>
             </div>
-              <div slot="footer" class="footbar">
-                <div class="itemPrices">
-                  <img
-                    class="locationIcon"
-                    src="../assets/img/location.png"
-                    width="8.17px"
-                    height="12.27px"
-                    alt=""
-                  />
-                  <span>距离: {{ item.juli }}km</span>
-                </div>
-                <div class="price">
-                  <span>合计:</span>
-                  <span class="price1">￥{{ item.orderPrice }}</span>
-                </div>
+            <div slot="footer" class="footbar">
+              <div class="itemPrices">
+                <img
+                  class="locationIcon"
+                  src="../assets/img/location.png"
+                  width="8.17px"
+                  height="12.27px"
+                  alt=""
+                />
+                <span>距离: {{ item.juli }}km</span>
               </div>
-             <div class="footerButton">
+              <div class="price">
+                <span>合计:</span>
+                <span class="price1">￥{{ item.orderPrice }}</span>
+              </div>
+            </div>
+            <div class="footerButton">
               <span v-if="true" @click="toDetail(item.id)">查看详情</span>
-              <span v-if="item.status == 2" class="confirm" @click="confrimWork(item.id)">施工完成</span>
+              <span @click="addWorkerHours(item.id)" v-if="item.status == 2"
+                >二次工时</span
+              >
+              <span
+                v-if="item.status == 2"
+                class="confirm"
+                @click="confrimWork(item.id)"
+                >施工完成</span
+              >
             </div>
           </div>
         </div>
@@ -147,7 +165,11 @@
         <div class="box">
           <div class="card" v-for="(item, index) in orderMsg" :key="index">
             <div class="topBox">
-              <span><img src="../assets/img/shop.png" alt="" />{{  item.Sharingmd.name }}</span>
+              <span
+                ><img src="../assets/img/shop.png" alt="" />{{
+                  item.Sharingmd.name
+                }}</span
+              >
               <span class="orderStatus">{{ item.orderStatus }}</span>
             </div>
             <div class="bottomBox">
@@ -155,43 +177,45 @@
                 <div class="imgBox">
                   <span class="image"><img :src="item.imageSrc"/></span>
                   <div class="timeTitle">
-                    <span>{{ item.timeTitle }}</span> 
-                    <span>发布时间:{{item.orderTime}}</span>
-                    <span>负责人:{{item.Sharingmd.fuzeren}}</span>
+                    <span>{{ item.timeTitle }}</span>
+                    <span>发布时间:{{ item.orderTime }}</span>
+                    <span>负责人:{{ item.Sharingmd.fuzeren }}</span>
                   </div>
                 </div>
               </div>
             </div>
-              <div slot="footer" class="footbar">
-                <div class="itemPrices">
-                  <img
-                    class="locationIcon"
-                    src="../assets/img/location.png"
-                    width="8.17px"
-                    height="12.27px"
-                    alt=""
-                  />
-                  <span>距离: {{ item.juli }}km</span>
-                </div>
-                <div class="price">
-                  <span>合计:</span>
-                  <span class="price1">￥{{ item.orderPrice }}</span>
-                </div>
+            <div slot="footer" class="footbar">
+              <div class="itemPrices">
+                <img
+                  class="locationIcon"
+                  src="../assets/img/location.png"
+                  width="8.17px"
+                  height="12.27px"
+                  alt=""
+                />
+                <span>距离: {{ item.juli }}km</span>
               </div>
-             <div class="footerButton">
+              <div class="price">
+                <span>合计:</span>
+                <span class="price1">￥{{ item.orderPrice }}</span>
+              </div>
+            </div>
+            <div class="footerButton">
               <span v-if="true" @click="toDetail(item.id)">查看详情</span>
-              <span @click="addWorkerHours(item.id)" v-if="item.status == 5">二次工时</span>
               <span class="confirm" v-if="item.status == 5">门店确认中</span>
             </div>
           </div>
-         
         </div>
       </van-tab>
       <van-tab title="已完成" name="3" data-id="3">
         <div class="box">
           <div class="card" v-for="(item, index) in orderMsg" :key="index">
             <div class="topBox">
-              <span><img src="../assets/img/shop.png" alt="" />{{  item.Sharingmd.name }}</span>
+              <span
+                ><img src="../assets/img/shop.png" alt="" />{{
+                  item.Sharingmd.name
+                }}</span
+              >
               <span class="orderStatus">{{ item.orderStatus }}</span>
             </div>
             <div class="bottomBox">
@@ -199,37 +223,45 @@
                 <div class="imgBox">
                   <span class="image"><img :src="item.imageSrc"/></span>
                   <div class="timeTitle">
-                    <span>{{ item.timeTitle }}</span> 
-                    <span>发布时间:{{item.orderTime}}</span>
-                    <span>负责人:{{item.Sharingmd.fuzeren}}</span>
+                    <span>{{ item.timeTitle }}</span>
+                    <span>发布时间:{{ item.orderTime }}</span>
+                    <span>负责人:{{ item.Sharingmd.fuzeren }}</span>
                   </div>
                 </div>
               </div>
             </div>
-              <div slot="footer" class="footbar">
-                <div class="itemPrices">
-                  <img
-                    class="locationIcon"
-                    src="../assets/img/location.png"
-                    width="8.17px"
-                    height="12.27px"
-                    alt=""
-                  />
-                  <span>距离: {{ item.juli }}km</span>
-                </div>
-                <div class="price">
-                  <span>合计:</span>
-                  <span class="price1">￥{{ item.orderPrice }}</span>
-                </div>
+            <div slot="footer" class="footbar">
+              <div class="itemPrices">
+                <img
+                  class="locationIcon"
+                  src="../assets/img/location.png"
+                  width="8.17px"
+                  height="12.27px"
+                  alt=""
+                />
+                <span>距离: {{ item.juli }}km</span>
               </div>
-             <div class="footerButton">
+              <div class="price">
+                <span>合计:</span>
+                <span class="price1">￥{{ item.orderPrice }}</span>
+              </div>
+            </div>
+            <div class="footerButton">
               <span v-if="true" @click="toDetail(item.id)">查看详情</span>
-              <span @click="addWorkerHours(item.id)" v-if="item.status == 5">二次工时</span>
-              <span v-if="item.status == 2" class="confirm" @click ="confrimWork(item.id)">确认完成</span>
-              <span class="confirm" @click="toChooseTime(item.id)" v-if="item.status == 5">待确认</span>
+              <span
+                v-if="item.status == 2"
+                class="confirm"
+                @click="confrimWork(item.id)"
+                >确认完成</span
+              >
+              <span
+                class="confirm"
+                @click="toChooseTime(item.id)"
+                v-if="item.status == 5"
+                >待确认</span
+              >
             </div>
           </div>
-         
         </div>
       </van-tab>
     </van-tabs>
@@ -237,7 +269,7 @@
 </template>
 <script>
 import NavBar from "../components/NavBar";
-import { Tab, Tabs, Icon, Cell, CellGroup, Divider ,Toast} from "vant";
+import { Tab, Tabs, Icon, Cell, CellGroup, Divider, Toast } from "vant";
 export default {
   name: "orderProcess",
   data() {
@@ -253,18 +285,19 @@ export default {
     this.checkedToken(localStorage.getItem("token"));
     this.activeName = this.$router.history.current.params.name;
     // 每一个按钮 存一个参数
+    this.$toast.setDefaultOptions({ duration: 800 });
     // 拉取 数据函数
     this.token = localStorage.getItem("token");
     this.getOrderStatus(this.activeName);
   },
 
   methods: {
-    
-    goHome(){
-      this.$router.push('/workerhome')
+    goHome() {
+      this.$router.push("/workerhome");
     },
     //  确认订单完成 直接完成不添加二次工时
-      confrimWork(orderIds) {
+    confrimWork(orderIds) {
+      let that = this;
       let token = localStorage.getItem("token");
       this.$axios
         .get(
@@ -272,14 +305,22 @@ export default {
         )
         .then(res => {
           // 调用弹窗
-          window.location.reload();
+          this.$toast.loading({
+            message: "施工完成",
+            forbidClick: true,
+            loadingType: "spinner",
+            onClose() {
+              that.$router.push("/orderdetail");
+            }
+          });
+          //  确认施工完成后直接
         })
         .catch(err => {
           // console.log(err);
         });
     },
     // 二次工时
-     addWorkerHours(id) {
+    addWorkerHours(id) {
       this.$router.push({
         name: "workershours",
         params: {
@@ -294,7 +335,7 @@ export default {
         message: "加载中",
         forbidClick: true,
         loadingType: "spinner",
-        onClose(){
+        onClose() {
           that.$router.push({
             name: "orderdetail"
           });
@@ -302,7 +343,7 @@ export default {
       });
     },
     checkedToken(token) {
-      // 验证token  有效期
+      // 验证token有效期
       this.$axios
         .get(
           `https://gx.budaohuaxia.com/api/Technician/CarToken?token=${token}`
@@ -332,7 +373,9 @@ export default {
     getOrderStatus(id = "8") {
       this.$axios
         .get(
-          `https://gx.budaohuaxia.com/api/Technician/StoreStatus?token=${this.token}&status=${id}&lng=${localStorage.getItem('lnglat')}`
+          `https://gx.budaohuaxia.com/api/Technician/StoreStatus?token=${
+            this.token
+          }&status=${id}&lng=${localStorage.getItem("lnglat")}`
         )
         .then(res => {
           this.orderMsg.splice(0, this.orderMsg.length);
@@ -360,15 +403,13 @@ export default {
               orderTime: item.js_ddsj,
               orderId: item.id,
               Sharingmd: item.Sharingmd,
-              car:item.Car,
-              time:item.time,
-              juli:item.juli,
-              id:item.id,
-              status:item.status
+              car: item.Car,
+              time: item.time,
+              juli: item.juli,
+              id: item.id,
+              status: item.status
             });
-   
-          }
-          );
+          });
         });
     }
   },
@@ -380,7 +421,7 @@ export default {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
     [Divider.name]: Divider,
-    [Toast.name]:Toast
+    [Toast.name]: Toast
   }
 };
 </script>
@@ -414,52 +455,52 @@ export default {
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
-    .footbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      margin-top: 15px;
-      margin-bottom: 15px;
-      .itemPrices {
-        .locationIcon {
-          margin-right: 10px;
-        }
-      }
-      .price {
-        .price1 {
-          margin-left: 10px;
-          color: #e37731;
-          font-size: 13px;
-        }
+  .footbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    .itemPrices {
+      .locationIcon {
+        margin-right: 10px;
       }
     }
-    .footerButton {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        padding-right: 10px;
-        span {
-          width: 68px;
-          height: 24px;
-          margin-left: 10px;
-          text-align: center;
-          line-height: 24px;
-          font-size: 12px;
-          border: 0.6px solid #666666;
-          border-radius: 2px;
-        }
-        // 确认订单完成
-        .confirm {
-          background-color: #e37731;
-          color: #ffffff;
-          border: none;
-        }
-        // 接单
-        .receipt {
-        }
+    .price {
+      .price1 {
+        margin-left: 10px;
+        color: #e37731;
+        font-size: 13px;
       }
+    }
+  }
+  .footerButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    span {
+      width: 68px;
+      height: 24px;
+      margin-left: 10px;
+      text-align: center;
+      line-height: 24px;
+      font-size: 12px;
+      border: 0.6px solid #666666;
+      border-radius: 2px;
+    }
+    // 确认订单完成
+    .confirm {
+      background-color: #e37731;
+      color: #ffffff;
+      border: none;
+    }
+    // 接单
+    .receipt {
+    }
+  }
 }
 .box .card .topBox {
   flex: 1;
@@ -514,11 +555,11 @@ export default {
   margin-right: 15px;
 }
 .box .card .bottomBox .bottomLeft .imgBox .timeTitle {
-  display:flex;
+  display: flex;
   flex-direction: column;
   font-size: 14px;
   font-weight: 500;
-  span{
+  span {
     font-size: 12px;
     color: #666666;
     margin-bottom: 10px;
@@ -551,10 +592,9 @@ export default {
   margin-top: 25px;
   font-size: 18px;
 }
-// 头部导航栏  
+// 头部导航栏
 .orderProcess .topnav {
-
-  width: 100%; 
+  width: 100%;
   height: 45px;
   background-color: white;
 }
@@ -562,7 +602,7 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  margin-bottom:8px;
+  margin-bottom: 8px;
   background-color: white;
 }
 .orderProcess .topnav .topBoxs .back {
